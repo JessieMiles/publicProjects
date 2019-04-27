@@ -1,0 +1,23 @@
+Collaborating in Git
+
+1. Always start by doing a 'git fetch' to pull down any new changes. Note that this is a safe command as it only creates a local copy of Origin. If there are any updates, you will need to do a 'git merge' before you start working on anything. Once you get comfortable with those commands you can just use 'git pull' which combines the two. 
+
+
+2. Don't work out of Master! Always create a local feature branch and make your changes from there. Use 'git checkout -b <branch name>' to both create a new branch and check it out.
+
+3. Make commits to your branch often. Start by adding untracked files to your working session one at a time with 'git add <filename>' (use 'git status' to see all of your untracked files). Or add all at once with 'git add .' (or git add -A'). Make sure to only include files that should be tracked.
+
+4. Once you have added all of the files, commit them with 'git commit -m', and enter a description of the change when prompted. If you can't easily describe your changes, you probably waited too long to do a commit and should consider smaller change intervals. 
+
+5. When your feature is ready for review, use 'git push' (from the branch) to send it up to Origin. The first time you push a branch to Origin you will need to use the command 'git push --set-upstream origin <branch name>'. After that, a 'git push' will suffice.
+
+6. After pushing the feature branch, go to the GitHub repo site and submit a pull request. This will allow your partner to review the work before it is added to Origin. 
+
+7. Once approved, you can do a merge to apply the changes to Origin. If you want, you can do a squash merge to make it do a single combined commit instead of stacking all of your commits onto Origin individually.
+
+8. After you have successfully merged to Origin, switch to your master branch ('git checkout master') and do a 'git pull'. Once that is done you can delete your feature branch ('git branch -D <branch name>' and start the whole process over.
+
+
+If you follow the above steps, you should minimize the chance of merge conflicts. It also helps to make sure you seperate the work in such a way that you minimize the need to edit the same files as much as possible. If you know you need to change a file that your partner is working on, see if they can do a merge first, before you start you feature branch.  
+
+

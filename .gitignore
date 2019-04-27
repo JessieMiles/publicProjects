@@ -1,0 +1,16 @@
+python_stack/my_environments
+# .gitignore
+python_stack/.vscode/
+python_stack/python/.idea/
+.idea/
+.idea/dataSources.xml
+*.zip
+__pycache__/
+venv/
+.vscode/
+.editorconfig
+*.mwb
+*.ini
+*.mako
+/app/
+static/storage/

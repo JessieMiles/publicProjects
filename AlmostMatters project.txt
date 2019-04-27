@@ -1,0 +1,44 @@
+
+Required Features:
+
+1. Account creation and login 
+	a. New user page should include name, email address, password and a screen name
+	b. Login page should accept either the screen name or email address
+	c. By default, the user should be added to all Public channels.
+
+2. Public channel
+	a. Any user with channel creation permissions should be able to start a public channel.
+	b. All users should be able to view all public channels in a sidebar or dropdown selection.
+	c. The creator or admin of a public channel should be able to delete it.
+
+3. Private channel
+	a. Admins should be able to start a private channel.
+	b. The admin can designate any user to be a channel member or channel admin.
+	c. Users should be notified when they are added to a private channel.
+	d. The Admin of a channel should be able to delete it.
+
+4. Direct messaging
+	a. Similar to a private channel except it can be created by any user.
+	b. The creator of the direct message will need to select at least one member.
+	
+5. Admin page
+	a. The admin page should allow the ability to give users certain privileges such as public or private channel creation, promotion to Administrator.
+
+6. API functionality (required for assignment completion)
+	a. My suggestion is to include an API from WikiQuotes (or other source) to let users include random quotes in their profile based on criteria that they specify (catagory, author, etc...)
+	
+
+Optional Features:
+
+1. The ability for a user to add image or picture to include with thier screen name.
+2. Ability to do a search for users or public channels by name.
+3. Friending.
+	a. A user should be allowed to friend another user so they show up as a favorite in the sidebar.
+	b. A friended user should have to accept a friend request.
+	c. Friends should be able to see all of the Public channels that their friends are in.
+	d. Friends should see the status of their friends.
+	e. Friends should be able to un-friend users.
+4. Users should be able to save conversations.
+5. 
+
+
