@@ -1,5 +1,5 @@
 python_stack/my_environments
-# .gitignore
+*.gitignore
 python_stack/.vscode/
 python_stack/python/.idea/
 .idea/
@@ -14,3 +14,4 @@ venv/
 *.mako
 /app/
 static/storage/
+/almostmattersenv/

@@ -2,17 +2,21 @@
 <html lang="en" xmlns:http="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
-		<title>Index Page</title>
+		<title>AlmostMatters</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
-	    <script src="{{ url_for('static', filename='register.js') }}"></script>
+        <script src="{{ url_for('static', filename='register.js') }}"></script>
+     
     </head>
 	<body>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-                <a class="navbar-brand abs" href="#">AlmostMatters</a>
+                <span style="font-size: 3em; color: white;">
+                    <i class="fas fa-battery-half"></i>
+                </span>
+                <a class="navbar-brand" href="">AlmostMatters</a> 
                 <div class="navbar-collapse collapse" id="collapsingNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -26,7 +30,23 @@
             </nav>
         </header>
             <div class="bg">
-                <div class="jumbotron"></div>
+                <div class="jumbotron">
+                    <div class="card mb-3" style="max-width: 80%;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                            <img src="/static/boardgame.jpg" class="card-img" alt="AlmostMatters board game photo">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">AlmostMatters</h5>
+                                <p class="card-text">Get connected with other developers!</p>
+                                <a href="/login" class="btn btn-outline-primary" role="button">Login</a>
+                                <a href="/register" class="btn btn-outline-primary" role="button">Register</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
                     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
