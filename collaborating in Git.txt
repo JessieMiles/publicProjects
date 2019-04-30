@@ -20,4 +20,6 @@ Collaborating in Git
 
 If you follow the above steps, you should minimize the chance of merge conflicts. It also helps to make sure you seperate the work in such a way that you minimize the need to edit the same files as much as possible. If you know you need to change a file that your partner is working on, see if they can do a merge first, before you start you feature branch.  
 
+The End
+
 
