@@ -10,11 +10,13 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(45))
-    last_name = db.Column(db.String(45))
-    email = db.Column(db.String(45))
-    password = db.Column(db.String(45))
-    screen_name = db.Column(db.String(45))
+    first_name = db.Column(db.String(45), nullable=True)
+    last_name = db.Column(db.String(45), nullable=True)
+    email = db.Column(db.String(45), unique=True, nullable=False)
+    password = db.Column(db.String(45), nullable=False)
+    screen_name = db.Column(db.String(45), unique=True, nullable=False)
+    profile_pic = db.Column(db.String(20), nullable=False, default='default_pic.jpg')
+    articles = db.relationship('Articles', backref='author', lazy=True)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
@@ -68,55 +70,13 @@ class Users(db.Model):
         return False, "Email or bad password"
 
 
-class Channels(db.Model):
+class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(45))
-    description = db.Column(db.String(45))
-    channel_type_id = db.Column(db.Integer)
-    created_by_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    creator = db.relationship("Users", foreign_keys=[created_by_id], backref="created_channels", cascade="all")
-    created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
-
-    def __repr__(self):
-        return "Channels(id ='%s', title = '%s', created_by_id = '%s', creator = '%s')" % (self.id, self.title,
-                                                                                           self.created_by_id,
-                                                                                           self.creator)
-
-    @classmethod
-    def add_new_channel(cls, owner_id, title, description, channel_type):
-        channel = cls(title=title, created_by_id=owner_id, description=description, channel_type_id=channel_type)
-        db.session.add(channel)
-        db.session.commit()
-        return channel.id
-
-    @classmethod
-    def get_public_channels(cls):
-        return Channels.query.filter_by(channel_type_id=1).all()
-
-    @classmethod
-    def get_owned_channels(cls, user_id):
-        return Channels.query.filter_by(created_by_id=user_id).all()
-
-
-class Memberships(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    members = db.relationship("Users", foreign_keys=[user_id], backref="user_membership", cascade="all")
-    channel_id = db.Column(db.Integer, db.ForeignKey("channels.id"), nullable=False)
-    channels = db.relationship("Channels", foreign_keys=[channel_id], backref="channel_members", cascade="all")
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
     def __repr__(self):
-        return "Memberships(id ='%s', title = '%s', created_at = '%s')" % (self.id, self.title, self.created_at)
-
-
-class AccessLevels(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(45))
-    created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
-
-    def __repr__(self):
-        return "AccessLevels(id ='%s', name = '%s', created_at = '%s')" % (self.id, self.name, self.created_at)
+        return "Article(id ='%s', title = '%s', user_id = '%s')" % (self.id, self.title, self.user_id)

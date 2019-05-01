@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, session, flash, send_from_directory, url_for
-from models import Users, Channels
+from models import Users, Articles
 from config import db, app
 from flask_sqlalchemy import SQLAlchemy
 
