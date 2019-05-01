@@ -12,6 +12,28 @@ PUBLIC_CHANNEL = 1
 PRIVATE_CHANNEL = 2
 
 
+posts = [
+    {
+        'author': 'Rick Brown',
+        'title': 'My First Blog',
+        'content': 'Blah blah blah blah',
+        'date_posted': 'April 29, 2019'
+    },
+{
+        'author': 'Rick Brown',
+        'title': 'My Second Blog',
+        'content': 'Blah blah blah blah',
+        'date_posted': 'April 30, 2019'
+    },
+{
+        'author': 'Jessie Miles',
+        'title': 'My First Blog',
+        'content': 'Yadda yada yada',
+        'date_posted': 'April 30, 2019'
+    }
+]
+
+
 def index():
     print(f"ROUTE: index")
     return render_template("index.html")
@@ -42,13 +64,8 @@ def show_dashboard():
         return redirect('/')
 
     current_user = Users.query.get(session['user_id'])
-    public_channels = Channels.get_public_channels()
 
-    private_channels = Channels.query.filter_by(id=PRIVATE_CHANNEL)
-    owned_channels = Channels.get_owned_channels(current_user.id)
-
-    return render_template("dashboard_test.html", user=current_user,public_channels=public_channels,
-                           owned_channels=owned_channels)
+    return render_template("dashboard.html", user=current_user, posts=posts)
 
 
 def show_login_page():
@@ -72,41 +89,3 @@ def users_logout():
     session.clear()
     return redirect('/')
 
-
-def show_channels_page():
-    print(f"ROUTE: show_channels_page")
-    if 'user_id' not in session:
-        print(f"User id not found")
-        return redirect('/')
-
-    current_user = Users.query.get(session['user_id'])
-
-    public_channels = Channels.get_public_channels()
-
-    private_channels = Channels.query.filter_by(id=PRIVATE_CHANNEL)
-    owned_channels = Channels.get_owned_channels(current_user.id)
-
-    return render_template("channels_test.html", user=current_user, public_channels=public_channels,
-                           owned_channels=owned_channels)
-
-
-def create_new_channel():
-    print(f"ROUTE: create_new_channel")
-    print(f"Adding new channel")
-    print(f"Channel form: {request.form}")
-
-    current_user = Users.query.get(session['user_id'])
-
-    if request.form['options'] == "public":
-        channel_type = PUBLIC_CHANNEL
-    else:
-        channel_type = PRIVATE_CHANNEL
-
-    channel_id = Channels.add_new_channel(current_user.id, request.form['channel_title'],
-                                          request.form['channel_description'], channel_type)
-
-    return redirect(url_for("show_channels_page"))
-
-
-def show_channel_messages(channel_id):
-    return render_template("channel_messages.html")
