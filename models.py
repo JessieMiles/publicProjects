@@ -72,11 +72,29 @@ class Users(db.Model):
 
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(45))
+    title = db.Column(db.String(30))
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
     def __repr__(self):
-        return "Article(id ='%s', title = '%s', user_id = '%s')" % (self.id, self.title, self.user_id)
+        return "Articles(id ='%s', title = '%s', content = '%s', user_id = '%s')" % (self.id, self.title, self.content,
+                                                                                     self.user_id)
+
+    @classmethod
+    def add_to_db(cls, form, user_id):
+
+        article = cls(title=form['post_title'],
+                      content=form['post_content'],
+                      user_id=user_id)
+
+        db.session.add(article)
+        db.session.commit()
+        return article.id
+
+    @classmethod
+    def get_latest_articles(cls):
+        return cls.query.all()
+
+

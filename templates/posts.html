@@ -1,0 +1,15 @@
+{% extends "./layout.html" %}
+
+{% block content %}
+<form id="post_form" action="/create_post" method="POST">
+  <div class="form-group">
+    <label for="post_title">Title</label>
+    <input type="text" class="form-control" name="post_title" id="post_title" placeholder="Post title">
+  </div>
+  <div class="form-group">
+    <label for="post_content">Content</label>
+    <textarea class="form-control" name="post_content" id="post_content" rows="20"></textarea>
+  </div>
+  <button class="btn btn-info my-2 bg-steel" id="post-button" type="submit">Post</button>
+</form>
+{% endblock content %}
