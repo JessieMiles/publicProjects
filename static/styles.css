@@ -6,12 +6,23 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+  color: #303030;
+}
+
+.navbar-brand{
+  font-size: large;
+}
+
+.container-fluid{
+  display: block;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .bg-steel {
   /*background-color: #5f788a;*/
   background-color: lightseagreen;
+  height: 65px;;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -79,4 +90,9 @@ a.article-title:hover {
 
 .account-heading {
   font-size: 2.5rem;
+}
+
+.navbar-brand{
+  font-size: xx-large;
+  padding: 5px;
 }
