@@ -12,26 +12,26 @@ PUBLIC_CHANNEL = 1
 PRIVATE_CHANNEL = 2
 
 
-posts = [
-    {
-        'author': 'Rick Brown',
-        'title': 'My First Blog',
-        'content': 'Blah blah blah blah',
-        'date_posted': 'April 29, 2019'
-    },
-{
-        'author': 'Rick Brown',
-        'title': 'My Second Blog',
-        'content': 'Blah blah blah blah',
-        'date_posted': 'April 30, 2019'
-    },
-{
-        'author': 'Jessie Miles',
-        'title': 'My First Blog',
-        'content': 'Yadda yada yada',
-        'date_posted': 'April 30, 2019'
-    }
-]
+# posts = [
+#     {
+#         'author': 'Rick Brown',
+#         'title': 'My First Blog',
+#         'content': 'Blah blah blah blah',
+#         'date_posted': 'April 29, 2019'
+#     },
+# {
+#         'author': 'Rick Brown',
+#         'title': 'My Second Blog',
+#         'content': 'Blah blah blah blah',
+#         'date_posted': 'April 30, 2019'
+#     },
+# {
+#         'author': 'Jessie Miles',
+#         'title': 'My First Blog',
+#         'content': 'Yadda yada yada',
+#         'date_posted': 'April 30, 2019'
+#     }
+# ]
 
 
 def index():
@@ -64,6 +64,8 @@ def show_dashboard():
         return redirect('/')
 
     current_user = Users.query.get(session['user_id'])
+    posts = Articles.get_latest_articles()
+    posts.reverse()
 
     return render_template("dashboard.html", user=current_user, posts=posts)
 
@@ -89,3 +91,16 @@ def users_logout():
     session.clear()
     return redirect('/')
 
+
+def show_post_form():
+    print(f"ROUTE: show_post_form")
+    current_user = Users.query.get(session['user_id'])
+
+    return render_template("posts.html", user=current_user)
+
+
+def post_article():
+    print(f"ROUTE: post_article")
+    print(f"Form Data: {request.form}")
+    article_id = Articles.add_to_db(request.form, session['user_id'])
+    return redirect(url_for("show_dashboard"))
