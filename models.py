@@ -15,7 +15,7 @@ class Users(db.Model):
     email = db.Column(db.String(45), unique=True, nullable=False)
     password = db.Column(db.String(45), nullable=False)
     screen_name = db.Column(db.String(45), unique=True, nullable=False)
-    profile_pic = db.Column(db.String(20), nullable=False, default='default_pic.jpg')
+    profile_pic = db.Column(db.String(20), nullable=False, default='/static/profile_avatar.jpg')
     articles = db.relationship('Articles', backref='author', lazy=True)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
