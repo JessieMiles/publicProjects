@@ -13,6 +13,9 @@
 	<body>
     <header>
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+                <span style="font-size: 3em; color: white;">
+                    <i class="fas fa-chess-bishop"></i>
+                </span>
                 <a class="navbar-brand" href="">AlmostMatters</a>
                 <div class="navbar-collapse collapse" id="collapsingNavbar">
                     <ul class="navbar-nav ml-auto">
@@ -24,7 +27,7 @@
         </header>
         <div class="container-fluid">
                 <div class="wrapper">
-                  <div class="span4" style="float: none; margin: 0 auto;">
+                  <div class="span4" style="float: none; margin: 0 auto; width: 75%;">
                     <div class="card">
                       <div class="card-body">
                         <form class="text-center border border-light p-5" action="/login_user" method="POST">
@@ -35,7 +38,7 @@
 
                             <input type="password" name="login_password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
 
-                            <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+                            <button class="btn btn-danger btn-block my-4" type="submit">Sign in</button>
                             <a href="/register" class="button">New User? Register Instead</a>
                          </form>
                       </div>
