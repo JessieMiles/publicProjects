@@ -93,8 +93,13 @@ a.article-title:hover {
 }
 
 #post-button {
-  margin-left: 650px;
+  display: inline-block;
+  /*margin-left: 450px;*/
   background-color: #20b2aa;
   padding-right: 20px;
   padding-left: 20px;
+}
+
+#post-cancel-button {
+  display: inline-block;
 }

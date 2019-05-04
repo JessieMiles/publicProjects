@@ -25,6 +25,10 @@ class Users(db.Model):
                (self.id, self.screen_name, self.first_name, self.last_name, self.email)
 
     @classmethod
+    def get_articles(cls):
+        return cls.articles
+
+    @classmethod
     def validate(cls, form):
 
         errors = []
@@ -97,4 +101,12 @@ class Articles(db.Model):
     def get_latest_articles(cls):
         return cls.query.all()
 
+    @classmethod
+    def validate(cls, form):
 
+        errors = []
+        if len(form['post_title']) < 2:
+            errors.append("The title must contain at least 2 characters")
+        if len(form['post_content']) < 2:
+            errors.append("The content must contain at least 2 characters")
+        return errors
