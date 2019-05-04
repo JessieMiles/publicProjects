@@ -24,6 +24,7 @@
                             <i class="fas fa-user"></i> {{ current_user.screen_name }} </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
                                 <a class="dropdown-item" href="/dashboard">Back</a>
+
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <a class="dropdown-item" href="/logout">Log out</a>
                             </div>
@@ -37,12 +38,14 @@
                   <div class="user-info" style="float: none; margin: 0 auto; width: 75%;">
                    
                       <div class="profile-pic"><img src="https://s3.us-east-2.amazonaws.com/almostmatters/profile_avatar.jpg" width="20%" class="rounded-circle"/>
+
                       <div class="layer">
                         <div class="loader"></div>
                         <p>Update Profile Picture:</p>
                       </div><a class="image-wrapper" href="#">
                         <form id="profilePictureForm" action="/upload_file" method="POST"></form>
                           <input class="input" id="changePicture" type="file"/>
+
                         </form></a>
                     </div>
                     <div class="username">
@@ -58,6 +61,7 @@
                             <div class="card">
                               <div class="card-body">
                                 <form id="profile_form" class="text-center border border-light p-5" action="/update_user_info" method="POST">
+
                                     <p class="h4 mb-4">Update Profile:</p>
 
                                     <div class="form-row mb-4">
@@ -90,6 +94,7 @@
                                     {% endwith %}
                                     <button class="btn btn-danger my-4 btn-block" type="submit">Update</button>
                                     <a button class="btn btn-info my-2 btn-block" href="/dashboard">Cancel</a>
+
                                 </form>
                               </div>
                             </div>
