@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'png'])
 PUBLIC_CHANNEL = 1
 PRIVATE_CHANNEL = 2
-
+PROFILE_PIC_FOLDER = "./templates/profile_pics"
 
 def index():
     print(f"ROUTE: index")
@@ -121,3 +121,36 @@ def edit_article():
     article_id = Articles.add_to_db(request.form, session['user_id'])
 
     return redirect(url_for("show_dashboard"))
+
+
+def show_profile_page(id):
+    user=Users.query.get(id)
+    return render_template("profile.html", current_user=user)
+
+def upload_file():
+    user_id = str(session['user_id'])
+    store_file = "./templates/profile_pics/" + user_id
+    print(f"store file path: {store_file}")
+    if not os.path.exists(store_file):
+        os.makedirs(store_file)
+
+    print(f"ROUTE: upload_file")
+    if request.method == 'POST' and 'files' in request.files:
+        for f in request.files.getlist('files'):
+            profile_pic = profile_pic(f.profile_pic)
+            print(f"Uploading {profile_pic}")
+            f.save(os.path.join(store_file, profile_pic))
+            flash('File(s) successfully uploaded')
+            Users.add_to_db(profile_pic)
+
+    return redirect(url_for("show_profile_page"))
+
+def uploaded_file(filename):
+    print(f"ROUTE: uploaded_file")
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+# def update_user_info(id):
+#     print(f"ROUTE: update_user_info")
+#     current_user = Users.query.get(session['user_id'])
+
+#     return redirect(url_for("show_profile_page"))

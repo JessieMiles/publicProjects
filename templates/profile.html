@@ -21,9 +21,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i> {{ user.screen_name }} </a>
+                            <i class="fas fa-user"></i> {{ current_user.screen_name }} </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                                <a class="dropdown-item" href="#">Back</a>
+                                <a class="dropdown-item" href="/dashboard">Back</a>
+
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <a class="dropdown-item" href="/logout">Log out</a>
                             </div>
@@ -35,14 +36,16 @@
       
         <div class="container-fluid">
                   <div class="user-info" style="float: none; margin: 0 auto; width: 75%;">
-                    <div class="profile-pic"><img src="https://s3.us-east-2.amazonaws.com/almostmatters/profile_avatar.jpg" width="20%" class="rounded-circle"/>
+                   
+                      <div class="profile-pic"><img src="https://s3.us-east-2.amazonaws.com/almostmatters/profile_avatar.jpg" width="20%" class="rounded-circle"/>
+
                       <div class="layer">
                         <div class="loader"></div>
                         <p>Update Profile Picture:</p>
                       </div><a class="image-wrapper" href="#">
-                        <form id="profilePictureForm" action="#">
-                          <input class="hidden-input" id="changePicture" type="file"/>
-                          <label class="edit glyphicon glyphicon-pencil" for="changePicture" type="file" title="Change picture"></label>
+                        <form id="profilePictureForm" action="/upload_file" method="POST"></form>
+                          <input class="input" id="changePicture" type="file"/>
+
                         </form></a>
                     </div>
                     <div class="username">
@@ -57,7 +60,8 @@
                           <div class="span4" style="float: none; margin: 0 auto; width: 75%;">
                             <div class="card">
                               <div class="card-body">
-                                <form id="profile_form" class="text-center border border-light p-5" action="" method="POST">
+                                <form id="profile_form" class="text-center border border-light p-5" action="/update_user_info" method="POST">
+
                                     <p class="h4 mb-4">Update Profile:</p>
 
                                     <div class="form-row mb-4">
@@ -89,7 +93,8 @@
                                         {% endif %}
                                     {% endwith %}
                                     <button class="btn btn-danger my-4 btn-block" type="submit">Update</button>
-                                    <button class="btn btn-info my-2 btn-block" type="submit">Cancel</button>
+                                    <a button class="btn btn-info my-2 btn-block" href="/dashboard">Cancel</a>
+
                                 </form>
                               </div>
                             </div>
