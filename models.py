@@ -76,7 +76,7 @@ class Users(db.Model):
     @classmethod
     def update(cls, id, form):
         article_to_update = cls.query.get(id)
-        article_to_update.title =
+        # article_to_update.title =
 
 
 class Articles(db.Model):
