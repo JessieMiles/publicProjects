@@ -103,3 +103,7 @@ a.article-title:hover {
 #post-cancel-button {
   display: inline-block;
 }
+
+#edit_post_link {
+  padding-left: 310px;
+}

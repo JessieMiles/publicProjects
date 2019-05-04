@@ -70,6 +70,13 @@ def users_logout():
     return redirect('/')
 
 
+def show_edit_user_post(id):
+    print(f"ROUTE: show_edit_user_post")
+    current_user = Users.query.get(session['user_id'])
+    post = Articles.query.get(id)
+    return render_template("edit_posts.html", post=post, user=current_user)
+
+
 def show_post_form():
     print(f"ROUTE: show_post_form")
     current_user = Users.query.get(session['user_id'])
@@ -88,6 +95,21 @@ def show_user_posts(id):
 
 def post_article():
     print(f"ROUTE: post_article")
+    print(f"Form Data: {request.form}")
+
+    errors = Articles.validate(request.form)
+    if errors:
+        for error in errors:
+            flash(error)
+        return redirect(url_for('show_post_form'))
+
+    article_id = Articles.add_to_db(request.form, session['user_id'])
+
+    return redirect(url_for("show_dashboard"))
+
+
+def edit_article():
+    print(f"ROUTE: edit_article")
     print(f"Form Data: {request.form}")
 
     errors = Articles.validate(request.form)

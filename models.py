@@ -73,6 +73,11 @@ class Users(db.Model):
                 return True, user.id
         return False, "Email or bad password"
 
+    @classmethod
+    def update(cls, id, form):
+        article_to_update = cls.query.get(id)
+        article_to_update.title =
+
 
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
