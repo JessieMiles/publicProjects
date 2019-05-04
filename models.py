@@ -73,11 +73,6 @@ class Users(db.Model):
                 return True, user.id
         return False, "Email or bad password"
 
-    @classmethod
-    def update(cls, id, form):
-        article_to_update = cls.query.get(id)
-        # article_to_update.title =
-
 
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -115,3 +110,11 @@ class Articles(db.Model):
         if len(form['post_content']) < 2:
             errors.append("The content must contain at least 2 characters")
         return errors
+
+
+    @classmethod
+    def update(cls, id, form):
+        article_to_update = cls.query.get(id)
+        article_to_update.title = request.form['title']
+        article_to_update.content = request.form['content']
+        db.session.commit()

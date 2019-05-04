@@ -108,7 +108,7 @@ def post_article():
     return redirect(url_for("show_dashboard"))
 
 
-def edit_article():
+def edit_article(id):
     print(f"ROUTE: edit_article")
     print(f"Form Data: {request.form}")
 
@@ -118,7 +118,7 @@ def edit_article():
             flash(error)
         return redirect(url_for('show_post_form'))
 
-    article_id = Articles.add_to_db(request.form, session['user_id'])
+    Articles.update(request.form, id)
 
     return redirect(url_for("show_dashboard"))
 
