@@ -1,3 +1,4 @@
+import urllib3
 from flask import Flask, render_template, redirect, request, session, flash, send_from_directory, url_for
 from models import Users, Articles
 from config import db, app
@@ -5,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 import os
 from werkzeug.utils import secure_filename
-
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'png'])
 PUBLIC_CHANNEL = 1
@@ -67,6 +67,9 @@ def show_dashboard():
     posts = Articles.get_latest_articles()
     posts.reverse()
 
+    qod = urllib3.Request("http://quotes.rest/quote/random.json")
+    # quote = qod['content']['quotes']
+
     return render_template("dashboard.html", user=current_user, posts=posts)
 
 
@@ -104,3 +107,12 @@ def post_article():
     print(f"Form Data: {request.form}")
     article_id = Articles.add_to_db(request.form, session['user_id'])
     return redirect(url_for("show_dashboard"))
+
+
+def show_user_posts(id):
+    print(f"ROUTE: show_user_posts")
+
+    user = Users.query.get(id)
+    posts = user.articles
+
+    return render_template("user_posts.html", posts=posts, user=user)
