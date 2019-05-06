@@ -115,6 +115,12 @@ class Articles(db.Model):
     @classmethod
     def update(cls, id, form):
         article_to_update = cls.query.get(id)
-        article_to_update.title = request.form['title']
-        article_to_update.content = request.form['content']
+        article_to_update.title = form['post_title']
+        article_to_update.content = form['post_content']
+        db.session.commit()
+
+    @classmethod
+    def delete(cls, id):
+        article_to_delete = cls.query.get(id)
+        db.session.delete(article_to_delete)
         db.session.commit()
