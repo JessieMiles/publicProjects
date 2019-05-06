@@ -10,7 +10,8 @@ from werkzeug.utils import secure_filename
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'png'])
 PUBLIC_CHANNEL = 1
 PRIVATE_CHANNEL = 2
-PROFILE_PIC_FOLDER = "./templates/profile_pics"
+PROFILE_PIC_FOLDER = "/static/profile_pics"
+
 
 def index():
     print(f"ROUTE: index")
@@ -124,12 +125,20 @@ def edit_article(id):
 
 
 def show_profile_page(id):
-    user=Users.query.get(id)
-    return render_template("profile.html", current_user=user)
+    user = Users.query.get(id)
+    user_pic = "/" + str(user.id) + "/" + user.profile_pic
+
+    if user.profile_pic == "default_pic.jpg":
+        pic_path = PROFILE_PIC_FOLDER + "/profile_avatar.jpg"
+    else:
+        pic_path = PROFILE_PIC_FOLDER + user_pic
+
+    return render_template("profile.html", current_user=user, profile_pic=pic_path)
+
 
 def upload_file():
     user_id = str(session['user_id'])
-    store_file = "./templates/profile_pics/" + user_id
+    store_file = "PROFILE_PIC_FOLDER" + "/" + str(user_id)
     print(f"store file path: {store_file}")
     if not os.path.exists(store_file):
         os.makedirs(store_file)
