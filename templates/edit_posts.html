@@ -14,11 +14,11 @@
 <form id="post_form" action="/edit_post/{{ post.id }}" method="POST">
   <div class="form-group">
     <label for="post_title">Title</label>
-    <input type="text" class="form-control" name="post_title" id="post_title" placeholder="{{ post.title }}">
+    <input type="text" class="form-control" name="post_title" id="post_title" value="{{ post.title }}">
   </div>
   <div class="form-group">
     <label for="post_content">Content</label>
-    <textarea class="form-control" name="post_content" id="post_content" rows="20" placeholder="{{ post.content }}"></textarea>
+    <textarea class="form-control" name="post_content" id="post_content" rows="20" >{{ post.content }}"</textarea>
   </div>
   <button class="btn btn-info my-2 bg-steel" id="post-button" type="submit">Post</button>
 </form>

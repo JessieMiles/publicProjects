@@ -73,6 +73,12 @@ class Users(db.Model):
                 return True, user.id
         return False, "Email or bad password"
 
+    @classmethod
+    def update_user_profile_pic(cls, user_id, filename):
+        user = cls.query.get(user_id)
+        user.profile_pic = filename
+        db.session.commit()
+
 
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
