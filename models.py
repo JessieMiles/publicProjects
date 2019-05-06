@@ -110,3 +110,16 @@ class Articles(db.Model):
         if len(form['post_content']) < 2:
             errors.append("The content must contain at least 2 characters")
         return errors
+
+    @classmethod
+    def update(cls, id, form):
+        article_to_update = cls.query.get(id)
+        article_to_update.title = form['post_title']
+        article_to_update.content = form['post_content']
+        db.session.commit()
+
+    @classmethod
+    def delete(cls, id):
+        article_to_delete = cls.query.get(id)
+        db.session.delete(article_to_delete)
+        db.session.commit()
