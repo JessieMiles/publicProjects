@@ -7,7 +7,7 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-                <p>Posted by:
+                <p><img src="{{ post.author.profile_pic }}" width="10%" class="rounded-circle"/>   Posted by:
                     <a class="mr-2" href="/user/posts/{{ post.author.id }}">{{ post.author.screen_name }}</a>
                     <small class="text-muted">{{ post.created_at }}</small>
                     {% if user.id == session['user_id'] %}

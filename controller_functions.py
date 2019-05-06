@@ -127,37 +127,38 @@ def edit_article(id):
 def delete_article(id):
     print(f"ROUTE: delete_article")
     Articles.delete(id)
-    return redirect(url_for("show_user_posts", id = session['user_id']))
+    return redirect(url_for("show_user_posts", id=session['user_id']))
+
 
 def show_profile_page(id):
     user = Users.query.get(id)
-    user_pic = "/" + str(user.id) + "/" + user.profile_pic
+    user_pic = user.profile_pic
 
-    if user.profile_pic == "default_pic.jpg":
-        pic_path = PROFILE_PIC_FOLDER + "/profile_avatar.jpg"
-    else:
-        pic_path = PROFILE_PIC_FOLDER + user_pic
-
-    return render_template("profile.html", current_user=user, profile_pic=pic_path)
+    return render_template("profile.html", current_user=user, profile_pic=user_pic)
 
 
 def upload_file():
     user_id = str(session['user_id'])
-    store_file = "PROFILE_PIC_FOLDER" + "/" + str(user_id)
+    store_file = "./static/profile_pics/" + str(user_id)
     print(f"store file path: {store_file}")
     if not os.path.exists(store_file):
         os.makedirs(store_file)
 
     print(f"ROUTE: upload_file")
+    current_user = Users.query.get(user_id)
     if request.method == 'POST' and 'files' in request.files:
         for f in request.files.getlist('files'):
-            profile_pic = profile_pic(f.profile_pic)
+            profile_pic = secure_filename(f.filename)
+            file_path = PROFILE_PIC_FOLDER + "/" + str(user_id) + "/" + profile_pic
             print(f"Uploading {profile_pic}")
             f.save(os.path.join(store_file, profile_pic))
             flash('File(s) successfully uploaded')
-            Users.add_to_db(profile_pic)
 
-    return redirect(url_for("show_profile_page"))
+            Users.update_user_profile_pic(current_user.id, file_path)
+            db.session.commit()
+
+    return redirect(url_for("show_profile_page", id=current_user.id))
+
 
 def uploaded_file(filename):
     print(f"ROUTE: uploaded_file")
