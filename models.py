@@ -111,7 +111,6 @@ class Articles(db.Model):
             errors.append("The content must contain at least 2 characters")
         return errors
 
-
     @classmethod
     def update(cls, id, form):
         article_to_update = cls.query.get(id)

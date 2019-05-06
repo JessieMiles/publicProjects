@@ -37,18 +37,15 @@
         <div class="container-fluid">
                   <div class="user-info" style="float: none; margin: 0 auto; width: 75%;">
                    
-                      <div class="profile-pic"><img src="https://s3.us-east-2.amazonaws.com/almostmatters/profile_avatar.jpg" width="20%" class="rounded-circle"/>
+                      <div class="profile-pic">
+                          <img src="{{ profile_pic }}" width="20%" class="rounded-circle"/>
+                      </div>
+                      <form class="text-center border border-light p-5" enctype=multipart/form-data action="/upload_file" method="POST">
+                            <input type="file" name="files" multiple>
+                            <button class="btn btn-info btn-block my-4" type="submit">Upload</button>
+                         </form>
 
-                      <div class="layer">
-                        <div class="loader"></div>
-                        <p>Update Profile Picture:</p>
-                      </div><a class="image-wrapper" href="#">
-                        <form id="profilePictureForm" action="/upload_file" method="POST"></form>
-                          <input class="input" id="changePicture" type="file"/>
-
-                        </form></a>
-                    </div>
-                    <div class="username">
+                      <div class="username">
                       <div class="name"><span class="verified"></span>{{current_user["first_name"] + ' ' + current_user["last_name"]}}</div>
                     </div>
                   </div>
