@@ -118,10 +118,15 @@ def edit_article(id):
             flash(error)
         return redirect(url_for('show_post_form'))
 
-    Articles.update(request.form, id)
+    Articles.update(id, request.form)
 
     return redirect(url_for("show_dashboard"))
 
+
+def delete_article(id):
+    print(f"ROUTE: delete_article")
+    Articles.delete(id)
+    return redirect(url_for("show_user_posts", id = session['user_id']))
 
 def show_profile_page(id):
     user=Users.query.get(id)

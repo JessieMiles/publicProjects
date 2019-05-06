@@ -1,7 +1,7 @@
 from config import app
 from controller_functions import index, show_register_page, process_new_user, show_dashboard, show_login_page, login, \
     users_logout, show_post_form, post_article, show_user_posts, show_edit_user_post, edit_article, show_profile_page, \
-    upload_file, uploaded_file
+    upload_file, uploaded_file, delete_article
 
 app.add_url_rule("/", view_func=index)
 app.add_url_rule("/register", view_func=show_register_page)
@@ -22,3 +22,4 @@ app.add_url_rule("/uploaded/<profile_pic>", view_func=uploaded_file)
 app.add_url_rule("/user/posts/<id>", view_func=show_user_posts)
 app.add_url_rule("/user/posts/edit/<id>", view_func=show_edit_user_post)
 app.add_url_rule("/edit_post/<id>", view_func=edit_article, methods=['POST'])
+app.add_url_rule("/user/posts/delete/<id>", view_func=delete_article)
