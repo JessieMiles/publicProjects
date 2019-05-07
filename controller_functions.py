@@ -2,8 +2,9 @@ from flask import Flask, render_template, redirect, request, session, flash, sen
 from models import Users, Articles
 from config import db, app
 from flask_sqlalchemy import SQLAlchemy
-
+import json
 import os
+# import requests
 from werkzeug.utils import secure_filename
 
 
@@ -45,6 +46,8 @@ def show_dashboard():
     current_user = Users.query.get(session['user_id'])
     posts = Articles.get_latest_articles()
     posts.reverse()
+
+    # qod = get_quote_of_the_day()
 
     return render_template("dashboard.html", user=current_user, posts=posts)
 
@@ -164,8 +167,14 @@ def uploaded_file(filename):
     print(f"ROUTE: uploaded_file")
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-# def update_user_info(id):
-#     print(f"ROUTE: update_user_info")
-#     current_user = Users.query.get(session['user_id'])
 
-#     return redirect(url_for("show_profile_page"))
+def get_quote_of_the_day():
+    response = requests.get('http://quotes.rest/qod.json')
+    quote = response.json()
+
+    qod = quote['contents']['quotes'][0]['quote']
+    qod_author = quote['contents']['quotes'][0]['author']
+
+    return {'quote': qod, 'author': qod_author}
+
+
